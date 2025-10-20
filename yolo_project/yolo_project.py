@@ -1,5 +1,6 @@
 from ultralytics import YOLO
 import cv2
+import os
 
 # Model yükle
 model = YOLO('yolov8n-seg.pt')
@@ -17,5 +18,6 @@ for i, result in enumerate(results):
     result_image_bgr = cv2.cvtColor(result_image, cv2.COLOR_RGB2BGR)
     
     # Kaydet
-    cv2.imwrite(f'segmentation_result_{i}.jpg', result_image_bgr)
+    output_path = os.path.join('images', f'segmentation_result_{i}.jpg')
+    cv2.imwrite(output_path, result_image_bgr)
     print(f"Mask'lı resim kaydedildi: segmentation_result_{i}.jpg")
